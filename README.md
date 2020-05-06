@@ -18,7 +18,7 @@
     `git clone https://github.com/voluntariado-ucc-ing/bff_mobile.git`
 2.  Move to folder:s
 
-    `cd bff_web_farmapago`
+    `cd bff_mobile`
 3. Switch to dev branch:    
 
     `git checkout dev`
