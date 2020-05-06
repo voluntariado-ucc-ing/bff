@@ -11,7 +11,7 @@
 
 *  [Docker](https://docs.docker.com/engine/install/)
 
-## Instalación e inicio
+## Installation and start
 
 1. Open terminal, go to folder where you want to clone the repository and run: 
     
