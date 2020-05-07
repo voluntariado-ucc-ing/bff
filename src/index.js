@@ -4,7 +4,7 @@ const app = express();
 const router = express.Router();
 const bodyParser = require('body-parser');
 const PORT = process.env.PORT | 3000;
-const { verifyToken } = require('./components/auth/auth.controller');
+const tokenChecker = require('./utils/tokenChecker');
 
 const authRoutes = require( './components/auth/auth.routes');
 const volunteerRoutes = require( './components/volunteers/volunteers.routes');
@@ -16,7 +16,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 router.use('/services/', authRoutes);
-router.use('/services/volunteers', verifyToken, volunteerRoutes);
+router.use('/services/volunteers', tokenChecker, volunteerRoutes);
 
 app.use(router);
 

@@ -10,7 +10,7 @@ module.exports.auth = async (req, res) => {
   return res.status(200).send(response);
 };
 
-module.exports.foo = async (req, res) => {
+module.exports.foo = (req, res) => {
     
-    return res.status(200).send("sasdaas");
+    return res.status(200).send("Testing jwt");
   };

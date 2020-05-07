@@ -27,32 +27,6 @@ module.exports.login = async req => {
     });
 };
 
-module.exports.verifyToken = async req => {
-
-    return new Promise(async (resolve, reject) => {
-
-        let token = req.headers['authorization'];
-
-        if(!token){
-            return new ResponseError("403", "JWT token is needed", "");
-        }
-
-        token = token.replace('Bearer ', '');
-
-        jwt.verify(token, config.tokenSecret, (err, user) => {
-            if (err) {
-                return reject(new ResponseError('403', 'Unauthorized', 'Invalid or expired tokens'));
-            } 
-            return resolve(new Response("Valid Token"));
-        })
-
-    }).catch(err => {
-        console.log(err);
-        return err;
-    });
-
-}
-
 module.exports.refreshToken = async req => {
 
     return new Promise(async (resolve, reject) => {

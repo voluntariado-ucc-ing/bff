@@ -18,11 +18,3 @@ module.exports.refreshToken = async (req, res) => {
     return res.status(200).send(response);
 };
 
-module.exports.verifyToken = async (req, res, next) => {
-    const response = await authService.verifyToken(req);
-    console.log(response);
-    if (response instanceof ResponseError) {
-        return res.status(response.error.code).send(response);
-    }
-    next();
-};
