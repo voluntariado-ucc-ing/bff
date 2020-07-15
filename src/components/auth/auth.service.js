@@ -1,8 +1,7 @@
 const jwt = require('jsonwebtoken');
 const config = require('../../../config/config');
 const { Response, ResponseError } = require('../../utils/response.model');
-const volunteerService = require('../volunteers/volunteers.controller');
-
+const axios = require('axios');
 
 const tokenList = {}
 
@@ -10,15 +9,19 @@ module.exports.login = async req => {
 
     return new Promise(async (resolve, reject) => {
 
+        const options = {
+            method: 'post',
+            url: `/volunteer/auth`,
+            baseURL: "http://" + process.env.VA_IP + ":" + process.env.VA_PORT,
+            timeout: 3500,
+            data: { ...req.body }
+        };
+          
+        let authResponse = await axios(options);
 
-        const username = "agusvelez" //req.body.username;
-        //const password = req.body.password;
-
-       
-        /* const volunteerResponse = await volunteerService.auth(username, password);
-        if(volunteerResponse instanceof ResponseError){
+        if(authResponse != '202'){
             return reject(new ResponseError("403", "Forbbiden", "Incorrect username or password"));
-        } */
+        } 
         
         return resolve(await createTokens(username));
     }).catch(err => {
@@ -58,9 +61,9 @@ createTokens = (username) => {
         const token = jwt.sign({ sub: username }, config.tokenSecret, { expiresIn: config.tokenLife });
         const refreshToken = jwt.sign({ sub: username }, config.refreshSecret, { expiresIn: config.refreshLife });
         const responseJWT = {
-        status: 'Logged in',
-        token: token,
-        refreshToken: refreshToken
+            status: 'Logged in',
+            token: token,
+            refreshToken: refreshToken
         }
         
         tokenList[refreshToken] = responseJWT;
