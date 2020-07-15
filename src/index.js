@@ -8,6 +8,7 @@ const tokenChecker = require('./utils/tokenChecker');
 
 const authRoutes = require( './components/auth/auth.routes');
 const volunteerRoutes = require( './components/volunteers/volunteers.routes');
+const donationsRoutes = require( './components/donations/donations.routes');
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -15,8 +16,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // parse application/json
 app.use(bodyParser.json());
 
-router.use('/services/', authRoutes);
-router.use('/services/volunteers', tokenChecker, volunteerRoutes);
+router.use('/auth/', authRoutes);
+router.use('/volunteer/', tokenChecker, volunteerRoutes);
+router.use('/donations/', tokenChecker, donationsRoutes);
 
 app.use(router);
 

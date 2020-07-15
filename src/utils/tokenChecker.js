@@ -4,7 +4,7 @@ const config = require('../../config/config');
 const { ResponseError } = require('./response.model');
 
 module.exports = (req, res, next) => {
-    const token = req.body.token || req.query.token || req.headers['x-access-token']
+    const token = req.body.token || req.query.token || req.headers['x-access-token'];
     // decode token
     if (token) {
         // verifies secret and checks exp
@@ -12,7 +12,6 @@ module.exports = (req, res, next) => {
             if (err) {
                 return res.status(401).send(new ResponseError('401', 'Unauthorized', 'Invalid or expired tokens'));
             }
-            
             req.decoded = decoded;
             next();
         });
