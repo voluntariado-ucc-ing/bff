@@ -1,9 +1,9 @@
 FROM node:10.16.3 as build-stage
 
-ENV VA_IP=172.17.0.3 \
+ENV VA_IP=178.18.0.8 \
     VA_PORT=8080 \
-    DA_IP=172.17.0.5 \
-    DA_PORT=4040 
+    DA_IP=178.18.0.7 \
+    DA_PORT=8080 
 
 RUN mkdir /app
 
