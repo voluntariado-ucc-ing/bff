@@ -7,7 +7,7 @@ module.exports.getDonators = async (req, res) => {
     if (response instanceof ResponseError) {
         return res.status(response.error.code).send(response);
     }
-    return res.status(200).send(response);
+    return res.status(200).send(response.body);
 };
 
 module.exports.getDonation = async (req, res) => {
@@ -15,7 +15,7 @@ module.exports.getDonation = async (req, res) => {
     if (response instanceof ResponseError) {
       return res.status(response.error.code).send(response);
     }
-    return res.status(200).send(response);
+    return res.status(200).send(response.body);
 };
 
 module.exports.createDonation = async (req, res) => {
@@ -23,5 +23,5 @@ module.exports.createDonation = async (req, res) => {
     if (response instanceof ResponseError) {
         return res.status(response.error.code).send(response);
     }
-    return res.status(201).send(response);
+    return res.status(201).send(response.body);
 };
