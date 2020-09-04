@@ -8,7 +8,8 @@ module.exports = {
             method: 'get',
             url: `/donations/donators`,
             baseURL: "http://" + process.env.DA_IP + ":" + process.env.DA_PORT,
-            timeout: 3500
+            timeout: 3500,
+            params: { ...req.query }
         };
           
         return await axios(options);

@@ -7,6 +7,7 @@ module.exports.getDonators = async (req, res) => {
     if (response instanceof ResponseError) {
         return res.status(response.error.code).send(response);
     }
+
     return res.status(200).send(response.body);
 };
 
