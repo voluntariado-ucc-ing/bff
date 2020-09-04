@@ -1,4 +1,4 @@
-# BFF Mobile
+# BFF 
 
 ## Pre requirements
 
@@ -25,7 +25,10 @@
 4. Install dependencies:
 
     `npm install`
-5. Start:
+
+5. Create .env file and fill this variables VA_IP, VA_PORT, DA_IP, DA_PORT. VA Volunteers Api, DA Donations Api.
+
+6. Start:
 
     `npm start`
     
@@ -35,8 +38,8 @@ Running `npm start` will leave the service running at [http://localhost:3000](ht
 ## Docker
 
 ```sh
-docker build -t bff-mobile-image .
+docker build -t bff-image .
 
-docker run --name=bff-mobile -d -p 3000:3000 bff-mobile-image
+docker run --name=bff -d -p 3000:6969 bff-image
  ```
 
