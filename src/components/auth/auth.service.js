@@ -16,7 +16,8 @@ module.exports.login = async req => {
             timeout: 3500,
             data: { ...req.body }
         };
-          
+        
+        let username = req.body.username;
         let authResponse = await axios(options);
 
         if(authResponse.status != 202){
