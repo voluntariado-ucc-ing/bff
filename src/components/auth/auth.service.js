@@ -19,7 +19,7 @@ module.exports.login = async req => {
           
         let authResponse = await axios(options);
 
-        if(authResponse != '202'){
+        if(authResponse.status != 202){
             return reject(new ResponseError("403", "Forbbiden", "Incorrect username or password"));
         } 
         
