@@ -5,7 +5,7 @@ const { ResponseError } = require('./response.model');
 const separator = " ";
 
 module.exports = (req, res, next) => {
-    const token = req.headers['Authorization'] ? req.headers['Authorization'].split(separator) : null;
+    const token = req.headers['Authorization'] ? req.headers['Authorization'].split(separator)[1] : null;
     
     // decode token
     if (token) {
