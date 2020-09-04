@@ -7,6 +7,7 @@ module.exports.get = async (req, res) => {
   if (response instanceof ResponseError) {
     return res.status(response.error.code).send(response);
   }
+  console.log(response);
   return res.status(200).send(response.body);
 };
 
@@ -16,6 +17,7 @@ module.exports.getByUsername = async (req, res) => {
   if (response instanceof ResponseError) {
     return res.status(response.error.code).send(response);
   }
+  console.log(response);
   return res.status(200).send(response.body);
 };
 
@@ -24,6 +26,7 @@ module.exports.getAllVolunteers = async (req, res) => {
   if (response instanceof ResponseError) {
     return res.status(response.error.code).send(response);
   }
+  console.log(response);
   return res.status(200).send(response.body);
 };
 
@@ -32,6 +35,7 @@ module.exports.getMedicalInfo = async (req, res) => {
   if (response instanceof ResponseError) {
     return res.status(response.error.code).send(response);
   }
+  console.log(response);
   return res.status(200).send(response.body);
 };
 
@@ -40,6 +44,7 @@ module.exports.create = async (req, res) => {
   if (response instanceof ResponseError) {
     return res.status(response.error.code).send(response);
   }
+  console.log(response);
   return res.status(200).send(response.body);
 };
 
@@ -48,6 +53,7 @@ module.exports.importCsv = async (req, res) => {
   if (response instanceof ResponseError) {
     return res.status(response.error.code).send(response);
   }
+  console.log(response);
   return res.status(200).send(response.body);
 };
 
@@ -56,6 +62,7 @@ module.exports.setMedicalInfo = async (req, res) => {
   if (response instanceof ResponseError) {
     return res.status(response.error.code).send(response);
   }
+  console.log(response);
   return res.status(200).send(response.body);
 };
 
@@ -64,6 +71,7 @@ module.exports.update = async (req, res) => {
   if (response instanceof ResponseError) {
     return res.status(response.error.code).send(response);
   }
+  console.log(response);
   return res.status(200).send(response.body);
 };
 
@@ -72,6 +80,7 @@ module.exports.updatePassword = async (req, res) => {
   if (response instanceof ResponseError) {
     return res.status(response.error.code).send(response);
   }
+  console.log(response);
   return res.status(200).send(response.body);
 };
 
@@ -80,5 +89,6 @@ module.exports.delete = async (req, res) => {
   if (response instanceof ResponseError) {
     return res.status(response.error.code).send(response);
   }
+  console.log(response);
   return res.status(200).send(response.body);
 };
