@@ -17,7 +17,7 @@ module.exports = {
             return response;
         }
         catch (err){
-            console.error("Error response:");
+            
             return new ResponseError(err.response.status, err.response.data.error, err.response.data.message)
         }
     },
@@ -35,7 +35,7 @@ module.exports = {
             return response;
         }
         catch (err){
-            console.error("Error response:");
+            
             return new ResponseError(err.response.status, err.response.data.error, err.response.data.message)
         }
     },
@@ -54,7 +54,7 @@ module.exports = {
             return response;
         }
         catch (err){
-            console.error("Error response:");
+            
             return new ResponseError(err.response.status, err.response.data.error, err.response.data.message)
         }   
     }
