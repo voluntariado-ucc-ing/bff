@@ -4,7 +4,6 @@ const { ResponseError } = require('../../utils/response.model');
 
 module.exports.getDonators = async (req, res) => {
     const response = await donationsService.getDonators(req);
-    console.log(response)
     if (response instanceof ResponseError) {
         return res.status(parseInt(response.error.code)).json(response.error);
     }
