@@ -4,27 +4,28 @@ const { ResponseError } = require('../../utils/response.model');
 
 module.exports.getDonators = async (req, res) => {
     const response = await donationsService.getDonators(req);
+    console.log(response)
     if (response instanceof ResponseError) {
-        return res.status(response.error.code).send(response);
+        return res.status(parseInt(response.error.code)).json(response.error);
     }
-    console.log(response);
-    return res.status(200).send(response.body);
+    
+    return res.status(200).send(response.data);
 };
 
 module.exports.getDonation = async (req, res) => {
     const response = await donationsService.getDonation(req);
     if (response instanceof ResponseError) {
-      return res.status(response.error.code).send(response);
+      return res.status(response.status).json(response.error);
     }
-    console.log(response);
-    return res.status(200).send(response.body);
+    
+    return res.status(200).send(response.data);
 };
 
 module.exports.createDonation = async (req, res) => {
     const response = await donationsService.createDonation(req);
     if (response instanceof ResponseError) {
-        return res.status(response.error.code).send(response);
+        return res.status(response.status).json(response.error);
     }
-    console.log(response);
-    return res.status(201).send(response.body);
+    
+    return res.status(201).send(response.data);
 };

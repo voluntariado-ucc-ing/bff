@@ -10,8 +10,15 @@ module.exports = {
             baseURL: "http://" + process.env.VA_IP + ":" + process.env.VA_PORT,
             timeout: 3500
         };
-          
-        return await axios(options);
+        try {
+            let response = await axios(options);
+            return response;
+        }
+        catch (err){
+            console.error("Error response:");
+            return new ResponseError(err.response.status, err.response.data.error, err.response.data.message)
+        }
+        
     },
 
     getByUsername: async req => {
@@ -23,7 +30,14 @@ module.exports = {
             params: { ...req.query }
         };
           
-        return await axios(options);
+        try {
+            let response = await axios(options);
+            return response;
+        }
+        catch (err){
+            console.error("Error response:");
+            return new ResponseError(err.response.status, err.response.data.error, err.response.data.message)
+        }
     },
 
     getAllVolunteers: async req => {
@@ -34,7 +48,14 @@ module.exports = {
             timeout: 3500,
         };
           
-        return await axios(options);
+        try {
+            let response = await axios(options);
+            return response;
+        }
+        catch (err){
+            console.error("Error response:");
+            return new ResponseError(err.response.status, err.response.data.error, err.response.data.message)
+        }
     },
 
     getMedicalInfo: async req => {
@@ -45,7 +66,14 @@ module.exports = {
             timeout: 3500
         };
           
-        return await axios(options);
+        try {
+            let response = await axios(options);
+            return response;
+        }
+        catch (err){
+            console.error("Error response:");
+            return new ResponseError(err.response.status, err.response.data.error, err.response.data.message)
+        }
     },
 
     create: async req => {
@@ -57,7 +85,14 @@ module.exports = {
             data: { ...req.body }
         };
           
-        return await axios(options);
+        try {
+            let response = await axios(options);
+            return response;
+        }
+        catch (err){
+            console.error("Error response:");
+            return new ResponseError(err.response.status, err.response.data.error, err.response.data.message)
+        }
     },
 
     importCsv: async req => {
@@ -69,7 +104,14 @@ module.exports = {
             data: { ...req.body }
         };
           
-        return await axios(options)
+        try {
+            let response = await axios(options);
+            return response;
+        }
+        catch (err){
+            console.error("Error response:");
+            return new ResponseError(err.response.status, err.response.data.error, err.response.data.message)
+        }
     },
     
     setMedicalInfo: async req => {
@@ -93,7 +135,14 @@ module.exports = {
             data: { ...req.body }
         };
           
-        return await axios(options)
+        try {
+            let response = await axios(options);
+            return response;
+        }
+        catch (err){
+            console.error("Error response:");
+            return new ResponseError(err.response.status, err.response.data.error, err.response.data.message)
+        }
     },
 
     updatePassword: async req => {
@@ -105,7 +154,14 @@ module.exports = {
             data: { ...req.body }
         };
           
-        return await axios(options)
+        try {
+            let response = await axios(options);
+            return response;
+        }
+        catch (err){
+            console.error("Error response:");
+            return new ResponseError(err.response.status, err.response.data.error, err.response.data.message)
+        }
     },
 
     delete: async req => {
@@ -116,7 +172,14 @@ module.exports = {
             timeout: 3500
         };
           
-        return await axios(options)
+        try {
+            let response = await axios(options);
+            return response;
+        }
+        catch (err){
+            console.error("Error response:");
+            return new ResponseError(err.response.status, err.response.data.error, err.response.data.message)
+        }
     }
 }
 

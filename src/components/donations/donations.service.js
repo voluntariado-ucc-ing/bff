@@ -12,7 +12,14 @@ module.exports = {
             params: { ...req.query }
         };
           
-        return await axios(options);
+        try {
+            let response = await axios(options);
+            return response;
+        }
+        catch (err){
+            console.error("Error response:");
+            return new ResponseError(err.response.status, err.response.data.error, err.response.data.message)
+        }
     },
 
     getDonation: async req => {
@@ -23,7 +30,14 @@ module.exports = {
             timeout: 3500
         };
           
-        return await axios(options);
+        try {
+            let response = await axios(options);
+            return response;
+        }
+        catch (err){
+            console.error("Error response:");
+            return new ResponseError(err.response.status, err.response.data.error, err.response.data.message)
+        }
     },
 
     createDonation: async req => {
@@ -35,6 +49,13 @@ module.exports = {
             data: { ...req.body }
         };
           
-        return await axios(options);
+        try {
+            let response = await axios(options);
+            return response;
+        }
+        catch (err){
+            console.error("Error response:");
+            return new ResponseError(err.response.status, err.response.data.error, err.response.data.message)
+        }   
     }
 }
