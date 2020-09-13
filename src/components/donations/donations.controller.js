@@ -28,3 +28,13 @@ module.exports.createDonation = async (req, res) => {
     
     return res.status(201).send(response.data);
 };
+
+module.exports.getDonations = async (req, res) => {
+    console.log('entrnado')
+    const response = await donationsService.getDonations(req);
+    if (response instanceof ResponseError) {
+      return res.status(response.status).json(response.error);
+    }
+    
+    return res.status(200).send(response.data);
+};

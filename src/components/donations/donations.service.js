@@ -40,6 +40,24 @@ module.exports = {
         }
     },
 
+    getDonations: async req => {
+        const options = {
+            method: 'get',
+            url: `/donations/all`,
+            baseURL: "http://" + process.env.DA_IP + ":" + process.env.DA_PORT,
+            timeout: 3500
+        };
+          
+        try {
+            let response = await axios(options);
+            return response;
+        }
+        catch (err){
+            
+            return new ResponseError(err.response.status, err.response.data.error, err.response.data.message)
+        }
+    },
+
     createDonation: async req => {
         const options = {
             method: 'post',
