@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken')
 const config = require('../../config/config');
-//const constants = require('../utils/constants');
-const { ResponseError } = require('./response.model');
+const { Response } = require('./response.model');
+
 const separator = " ";
 
 module.exports = (req, res, next) => {
@@ -11,7 +11,17 @@ module.exports = (req, res, next) => {
         // verifies secret and checks exp
         jwt.verify(token, config.tokenSecret, (err, decoded) => {
             if (err) {
-                return res.status(401).send(new ResponseError('401', 'Unauthorized', 'Invalid or expired tokens'));
+                return res.status(401).send(
+                    new Response(
+                        null,
+                        {
+                            code: 401,
+                            message: 'Unauthorized', 
+                            description: 'Invalid or expired tokens'
+                        },
+                        401
+                    )
+                );
             }
             req.decoded = decoded;
             next();
@@ -19,6 +29,16 @@ module.exports = (req, res, next) => {
     } else {
         // if there is no token
         // return an error
-        return res.status(403).send(new ResponseError("403", "Forbbiden", "JWT token is needed"));
+        return res.status(403).send(
+            new Response(
+                null,
+                error= {
+                    code: 403,
+                    message: 'Forbbiden', 
+                    description: "JWT token is needed"
+                },
+                403
+            )
+        )
     }
 }

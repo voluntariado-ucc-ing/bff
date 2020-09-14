@@ -1,9 +1,8 @@
 const jwt = require('jsonwebtoken');
 const config = require('../../../config/config');
-const { Response, ResponseError } = require('../../utils/response.model');
+const { Response } = require('../../utils/response.model');
+const { redis_client } = require('../../utils/cache');
 const axios = require('axios');
-
-const tokenList = {}
 
 module.exports.login = async req => {
 
@@ -16,15 +15,24 @@ module.exports.login = async req => {
             timeout: 3500,
             data: { ...req.body }
         };
-        
-        let username = req.body.username;
-        let authResponse = await axios(options);
-
-        if(authResponse.status != 202){
-            return reject(new ResponseError("403", "Forbbiden", "Incorrect username or password"));
-        } 
-        
-        return resolve(await createTokens(username));
+                
+        try {
+            let authResponse = await axios(options);
+            return resolve(await createTokens());
+        }
+        catch (err){
+            return resolve(
+                new Response(
+                    null,
+                    {
+                        code: err.response.status,
+                        message: 'Forbbiden', 
+                        description: 'Incorrect username or password'
+                    },
+                    err.response.status,
+                )
+            );
+        }
     }).catch(err => {
         console.log(err);
         return err;
@@ -35,40 +43,60 @@ module.exports.refreshToken = async req => {
 
     return new Promise(async (resolve, reject) => {
         const data = req.body;
-
-        if ((data.refreshToken) && (data.refreshToken in tokenList)) {
-            const username = data.username;
-
-            const refresh = data.refreshToken.replace('Bearer ', '');
-
-            jwt.verify(refresh, config.refreshSecret, async (err, user) => {
+        let refreshToken = await redis_client.get(data.refresh_token);
+        
+        if (refreshToken) {
+            jwt.verify(data.refresh_token, config.refreshSecret, async (err, user) => {
                 if (err) {
-                    return reject(new ResponseError('403', 'Unauthorized', 'Invalid or expired tokens'));
-                } 
+                    await client.del(refreshToken);
+                    return resolve(
+                        new Response(
+                            null,
+                            {
+                                code: 403,
+                                message: 'Unauthorized', 
+                                description: 'Invalid or expired tokens'
+                            },
+                            403
+                        )
+                    );
+                }
 
-                return resolve(await createTokens(username));
+                return resolve(await createTokens());
             })   
         } else {
-            return reject(new ResponseError('403', 'Unauthorized', 'Invalid or expired tokens'));
+            return resolve(
+                new Response(
+                    null,
+                    {
+                        code: 403,
+                        message: 'Unauthorized', 
+                        description: 'Invalid or expired tokens'
+                    },
+                    403
+                )
+            );
         }
     }).catch(err => {
-        console.log(err);
         return err;
     });
 }
 
-createTokens = (username) => {
+createTokens = async () => {
     return new Promise((resolve, reject) => {
-        const token = jwt.sign({ sub: username }, config.tokenSecret, { expiresIn: config.tokenLife });
-        const refreshToken = jwt.sign({ sub: username }, config.refreshSecret, { expiresIn: config.refreshLife });
+        const token = jwt.sign({subs:''}, config.tokenSecret, { expiresIn: config.tokenLife });
+        const refreshToken = jwt.sign({subs:''}, config.refreshSecret, { expiresIn: config.refreshLife });
         const responseJWT = {
-            status: 'Logged in',
+            expiry: Math.round(new Date(new Date().getTime() + config.tokenLifeMiliseconds).getTime() / 1000),
             token: token,
             refreshToken: refreshToken
         }
         
-        tokenList[refreshToken] = responseJWT;
-        return resolve(new Response(responseJWT));
+        redis_client.set(refreshToken, '', (err, res) => {
+            console.log(res);
+            console.log(err);
+        });
+        return resolve(new Response(responseJWT, null, 200));
     }).catch(err => {
         console.log(err);
         return err;

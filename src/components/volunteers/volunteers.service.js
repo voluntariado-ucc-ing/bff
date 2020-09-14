@@ -1,5 +1,4 @@
-const { Response, ResponseError } = require('../../utils/response.model');
-const axios = require('axios');
+const createResponse = require('../../utils/createResponse');
 
 module.exports = {
 
@@ -10,15 +9,7 @@ module.exports = {
             baseURL: "http://" + process.env.VA_IP + ":" + process.env.VA_PORT,
             timeout: 3500
         };
-        try {
-            let response = await axios(options);
-            return response;
-        }
-        catch (err){
-            
-            return new ResponseError(err.response.status, err.response.data.error, err.response.data.message)
-        }
-        
+        return await createResponse(options);
     },
 
     getByUsername: async req => {
@@ -30,14 +21,7 @@ module.exports = {
             params: { ...req.query }
         };
           
-        try {
-            let response = await axios(options);
-            return response;
-        }
-        catch (err){
-            
-            return new ResponseError(err.response.status, err.response.data.error, err.response.data.message)
-        }
+        return await createResponse(options);
     },
 
     getAllVolunteers: async req => {
@@ -48,14 +32,7 @@ module.exports = {
             timeout: 3500,
         };
           
-        try {
-            let response = await axios(options);
-            return response;
-        }
-        catch (err){
-            
-            return new ResponseError(err.response.status, err.response.data.error, err.response.data.message)
-        }
+        return await createResponse(options);
     },
 
     getMedicalInfo: async req => {
@@ -65,15 +42,7 @@ module.exports = {
             baseURL: "http://" + process.env.VA_IP + ":" + process.env.VA_PORT,
             timeout: 3500
         };
-          
-        try {
-            let response = await axios(options);
-            return response;
-        }
-        catch (err){
-            
-            return new ResponseError(err.response.status, err.response.data.error, err.response.data.message)
-        }
+        return await createResponse(options);
     },
 
     create: async req => {
@@ -85,14 +54,7 @@ module.exports = {
             data: { ...req.body }
         };
           
-        try {
-            let response = await axios(options);
-            return response;
-        }
-        catch (err){
-            
-            return new ResponseError(err.response.status, err.response.data.error, err.response.data.message)
-        }
+        return await createResponse(options);
     },
 
     importCsv: async req => {
@@ -103,15 +65,8 @@ module.exports = {
             timeout: 3500,
             data: { ...req.body }
         };
-          
-        try {
-            let response = await axios(options);
-            return response;
-        }
-        catch (err){
-            
-            return new ResponseError(err.response.status, err.response.data.error, err.response.data.message)
-        }
+
+        return await createResponse(options);
     },
     
     setMedicalInfo: async req => {
@@ -122,8 +77,8 @@ module.exports = {
             timeout: 3500,
             data: { ...req.body }
         };
-          
-        return await axios(options)
+
+        return await createResponse(options);
     },
 
     update: async req => {
@@ -135,14 +90,7 @@ module.exports = {
             data: { ...req.body }
         };
           
-        try {
-            let response = await axios(options);
-            return response;
-        }
-        catch (err){
-            
-            return new ResponseError(err.response.status, err.response.data.error, err.response.data.message)
-        }
+        return await createResponse(options);
     },
 
     updatePassword: async req => {
@@ -154,14 +102,7 @@ module.exports = {
             data: { ...req.body }
         };
           
-        try {
-            let response = await axios(options);
-            return response;
-        }
-        catch (err){
-            
-            return new ResponseError(err.response.status, err.response.data.error, err.response.data.message)
-        }
+        return await createResponse(options);
     },
 
     delete: async req => {
@@ -171,15 +112,8 @@ module.exports = {
             baseURL: "http://" + process.env.VA_IP + ":" + process.env.VA_PORT,
             timeout: 3500
         };
-          
-        try {
-            let response = await axios(options);
-            return response;
-        }
-        catch (err){
-            
-            return new ResponseError(err.response.status, err.response.data.error, err.response.data.message)
-        }
+
+        return await createResponse(options);
     }
 }
 

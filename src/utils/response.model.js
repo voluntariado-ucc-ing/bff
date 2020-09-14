@@ -1,22 +1,9 @@
 class Response {
-  constructor(body) {
-    this.body = body || {};
-    this.error = null;
+  constructor(body, error, status) {
+    this.body = body;
+    this.error = error || null;
+    this.status = status;
   }
 }
 
 exports.Response = Response;
-
-class ResponseError {
-  constructor(code, message, description) {
-    this.body = null;
-    this.status = code;
-    this.error = {
-        code,
-        message,
-        description
-    }
-  }
-}
-
-exports.ResponseError = ResponseError;

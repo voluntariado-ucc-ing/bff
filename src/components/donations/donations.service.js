@@ -1,5 +1,4 @@
-const { Response, ResponseError } = require('../../utils/response.model');
-const axios = require('axios');
+const createResponse = require('../../utils/createResponse');
 
 module.exports = {
 
@@ -12,14 +11,7 @@ module.exports = {
             params: { ...req.query }
         };
           
-        try {
-            let response = await axios(options);
-            return response;
-        }
-        catch (err){
-            
-            return new ResponseError(err.response.status, err.response.data.error, err.response.data.message)
-        }
+        return await createResponse(options);
     },
 
     getDonation: async req => {
@@ -30,14 +22,7 @@ module.exports = {
             timeout: 3500
         };
           
-        try {
-            let response = await axios(options);
-            return response;
-        }
-        catch (err){
-            
-            return new ResponseError(err.response.status, err.response.data.error, err.response.data.message)
-        }
+        return await createResponse(options);
     },
 
     getDonations: async req => {
@@ -45,17 +30,10 @@ module.exports = {
             method: 'get',
             url: `/donations/all`,
             baseURL: "http://" + process.env.DA_IP + ":" + process.env.DA_PORT,
-            timeout: 3500
+            timeout: 3500,
+            params: { ...req.query }
         };
-          
-        try {
-            let response = await axios(options);
-            return response;
-        }
-        catch (err){
-            
-            return new ResponseError(err.response.status, err.response.data.error, err.response.data.message)
-        }
+        return await createResponse(options);
     },
 
     createDonation: async req => {
@@ -67,13 +45,6 @@ module.exports = {
             data: { ...req.body }
         };
           
-        try {
-            let response = await axios(options);
-            return response;
-        }
-        catch (err){
-            
-            return new ResponseError(err.response.status, err.response.data.error, err.response.data.message)
-        }   
+        return await createResponse(options);
     }
 }

@@ -1,17 +1,18 @@
-const bcrypt = require('bcryptjs');
-const salt = bcrypt.genSaltSync(10);
-const hash = bcrypt.hashSync("Volunteer", salt);
-const hashRefresh = bcrypt.hashSync("Volunteers", salt);
+const hash = "secret"
+const hashRefresh = "secretpor2"
+
 
 const tokenSecret = hash;
 const refreshSecret = hashRefresh;
 
 const tokenLife = '10m';
-const refreshLife = '20m';
+const refreshLife = '7d';
+const tokenLifeMiliseconds = 600000;
 
 module.exports = {
   refreshLife,
   refreshSecret,
   tokenLife,
-  tokenSecret
+  tokenSecret,
+  tokenLifeMiliseconds
 }

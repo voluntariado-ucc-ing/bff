@@ -18,7 +18,7 @@ app.use(bodyParser.json());
 
 router.use('/auth', authRoutes);
 router.use('/volunteer', tokenChecker, volunteerRoutes);
-router.use('/donations', tokenChecker, donationsRoutes);
+router.use('/donation', tokenChecker, donationsRoutes);
 router.use('/healthcheck', (req, res) => {res.status(200).send('alive!!!') });
 
 app.use(router);
