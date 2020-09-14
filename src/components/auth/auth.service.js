@@ -89,7 +89,7 @@ createTokens = async () => {
         const responseJWT = {
             expiry: Math.round(new Date(new Date().getTime() + config.tokenLifeMiliseconds).getTime() / 1000),
             token: token,
-            refreshToken: refreshToken
+            refresh_token: refreshToken
         }
         
         redis_client.set(refreshToken, '', (err, res) => {
