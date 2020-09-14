@@ -18,7 +18,7 @@ module.exports.login = async req => {
                 
         try {
             let authResponse = await axios(options);
-            return resolve(await createTokens());
+            return resolve(await createTokens(authResponse.data));
         }
         catch (err){
             return resolve(
@@ -62,7 +62,7 @@ module.exports.refreshToken = async req => {
                     );
                 }
 
-                return resolve(await createTokens());
+                return resolve(await createTokens({}));
             })   
         } else {
             return resolve(
@@ -82,7 +82,7 @@ module.exports.refreshToken = async req => {
     });
 }
 
-createTokens = async () => {
+createTokens = async (body) => {
     return new Promise((resolve, reject) => {
         const token = jwt.sign({subs:''}, config.tokenSecret, { expiresIn: config.tokenLife });
         const refreshToken = jwt.sign({subs:''}, config.refreshSecret, { expiresIn: config.refreshLife });
@@ -96,7 +96,10 @@ createTokens = async () => {
             console.log(res);
             console.log(err);
         });
-        return resolve(new Response(responseJWT, null, 200));
+        return resolve(new Response(
+            {...responseJWT, ...body}, 
+            null, 
+            200));
     }).catch(err => {
         console.log(err);
         return err;

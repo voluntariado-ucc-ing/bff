@@ -17,7 +17,7 @@ module.exports = {
     getDonation: async req => {
         const options = {
             method: 'get',
-            url: `/donations/get/${req.params.donation_id}`,
+            url: `/donations/get/${req.params.id}`,
             baseURL: "http://" + process.env.DA_IP + ":" + process.env.DA_PORT,
             timeout: 3500
         };
@@ -40,6 +40,18 @@ module.exports = {
         const options = {
             method: 'post',
             url: `/donations/create`,
+            baseURL: "http://" + process.env.DA_IP + ":" + process.env.DA_PORT,
+            timeout: 3500,
+            data: { ...req.body }
+        };
+          
+        return await createResponse(options);
+    },
+
+    updateDonation: async req => {
+        const options = {
+            method: 'patch',
+            url: `/donations/${req.params.id}`,
             baseURL: "http://" + process.env.DA_IP + ":" + process.env.DA_PORT,
             timeout: 3500,
             data: { ...req.body }

@@ -29,3 +29,10 @@ module.exports.getDonations = async (req, res) => {
     delete response['status'];
     return res.status(status).send(response);
 };
+
+module.exports.updateDonation = async (req, res) => {
+    const response = await donationsService.updateDonation(req);
+    let status = response.status;
+    delete response['status'];
+    return res.status(status).send(response);
+};

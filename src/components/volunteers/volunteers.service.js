@@ -98,7 +98,7 @@ module.exports = {
             method: 'put',
             url: `/volunteer/auth/update`,
             baseURL: "http://" + process.env.VA_IP + ":" + process.env.VA_PORT,
-            timeout: 3500,
+            timeout: 5000,
             data: { ...req.body }
         };
           
