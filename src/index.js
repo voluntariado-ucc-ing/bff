@@ -20,7 +20,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 // parse multipart/form-data for importing csv file
-app.use(upload.array()); 
+app.use(upload.single('file')); 
 
 router.use('/auth', authRoutes);
 router.use('/volunteer', tokenChecker, volunteerRoutes);
