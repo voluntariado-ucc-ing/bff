@@ -63,7 +63,7 @@ module.exports = {
             url: `/volunteer/import`,
             baseURL: "http://" + process.env.VA_IP + ":" + process.env.VA_PORT,
             timeout: 3500,
-            data: { ...req.body },
+            data: { ...req.file },
             headers: req.headers
         };
         console.log("ORIGINAL REQUEST\n");
