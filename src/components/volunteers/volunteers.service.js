@@ -68,9 +68,9 @@ module.exports = {
             timeout: 3500,
             data: form,
         };
-        
+
         console.log("FORMATTED REQUEST\n");
-        console.log(JSON.stringify(options));
+        console.log(options);
 
         return await createResponse(options);
     },
