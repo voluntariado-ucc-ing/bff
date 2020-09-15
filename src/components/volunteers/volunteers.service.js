@@ -66,7 +66,7 @@ module.exports = {
             url: `/volunteer/import`,
             baseURL: "http://" + process.env.VA_IP + ":" + process.env.VA_PORT,
             timeout: 3500,
-            data: form,
+            data: req.file,
             headers: form.getHeaders()
         };
 
