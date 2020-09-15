@@ -67,10 +67,8 @@ module.exports = {
             baseURL: "http://" + process.env.VA_IP + ":" + process.env.VA_PORT,
             timeout: 3500,
             data: form,
-            headers: req.headers
         };
-        console.log("ORIGINAL REQUEST\n");
-        console.log(req);
+        
         console.log("FORMATTED REQUEST\n");
         console.log(JSON.stringify(options));
 
