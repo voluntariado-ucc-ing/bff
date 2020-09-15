@@ -67,7 +67,7 @@ module.exports = {
             headers: req.headers
         };
         console.log("ORIGINAL REQUEST\n");
-        console.log(JSON.stringify(req));
+        console.log(req);
         console.log("FORMATTED REQUEST\n");
         console.log(JSON.stringify(options));
 
