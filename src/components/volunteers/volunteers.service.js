@@ -66,7 +66,10 @@ module.exports = {
             url: `/volunteer/import`,
             baseURL: "http://" + process.env.VA_IP + ":" + process.env.VA_PORT,
             timeout: 3500,
-            data: form,
+            data: form.FormData,
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
         };
 
         console.log("FORMATTED REQUEST\n");
