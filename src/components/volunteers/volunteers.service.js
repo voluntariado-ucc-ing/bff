@@ -63,10 +63,12 @@ module.exports = {
             url: `/volunteer/import`,
             baseURL: "http://" + process.env.VA_IP + ":" + process.env.VA_PORT,
             timeout: 3500,
-            data: req.body ,
+            data: { ...req.data },
             headers: req.headers
         };
-
+        console.log("ORIGINAL REQUEST\n");
+        console.log(JSON.stringify(req));
+        console.log("FORMATTED REQUEST\n");
         console.log(JSON.stringify(options));
 
         return await createResponse(options);
