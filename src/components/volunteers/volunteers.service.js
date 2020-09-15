@@ -60,7 +60,7 @@ module.exports = {
 
     importCsv: async req => {
         var form = new FormData()
-        form.append("file", req.file)
+        form.append("file", req.file.buffer)
         const options = {
             method: 'post',
             url: `/volunteer/import`,
