@@ -66,8 +66,8 @@ module.exports = {
             data: { ...req.body },
             headers: req.headers
         };
-        
-        console.log(JSON.stringify(options.headers));
+
+        console.log(JSON.stringify(options));
 
         return await createResponse(options);
     },
