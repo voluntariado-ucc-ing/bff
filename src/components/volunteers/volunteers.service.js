@@ -1,5 +1,4 @@
 const createResponse = require('../../utils/createResponse');
-var FormData = require('form-data');
 
 module.exports = {
 
@@ -59,15 +58,13 @@ module.exports = {
     },
 
     importCsv: async req => {
-        var form = new FormData()
-        form.append("file", req.file.buffer)
         const options = {
             method: 'post',
             url: `/volunteer/import`,
             baseURL: "http://" + process.env.VA_IP + ":" + process.env.VA_PORT,
             timeout: 3500,
             data: req.file,
-            headers: form.getHeaders()
+            headers: req.headers
         };
 
         console.log("FORM\n");
