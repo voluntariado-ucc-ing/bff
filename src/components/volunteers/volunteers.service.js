@@ -67,9 +67,6 @@ module.exports = {
             headers: req.headers
         };
 
-        console.log("FORM\n");
-        console.log(form)
-
         console.log("FORMATTED REQUEST\n");
         console.log(options);
 
