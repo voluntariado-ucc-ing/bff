@@ -12,7 +12,7 @@ api.post("/create", volunteerController.create)
 api.post("/import", volunteerController.importCsv)
 api.post("/medical_info/:volunteer_id", volunteerController.setMedicalInfo)
 
-api.put("/update/:id", volunteerController.update)
+api.patch("/update/:id", volunteerController.update)
 api.put("/auth/update", volunteerController.updatePassword)
 
 api.delete("/delete/:id", volunteerController.delete)

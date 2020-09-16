@@ -83,7 +83,7 @@ module.exports = {
 
     update: async req => {
         const options = {
-            method: 'put',
+            method: 'patch',
             url: `/volunteer/update/${req.params.id}`,
             baseURL: "http://" + process.env.VA_IP + ":" + process.env.VA_PORT,
             timeout: 3500,

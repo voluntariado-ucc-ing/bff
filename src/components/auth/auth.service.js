@@ -87,7 +87,7 @@ createTokens = async (body) => {
         const token = jwt.sign({subs:''}, config.tokenSecret, { expiresIn: config.tokenLife });
         const refreshToken = jwt.sign({subs:''}, config.refreshSecret, { expiresIn: config.refreshLife });
         const responseJWT = {
-            expiry: Math.round(new Date(new Date().getTime() + config.tokenLifeMiliseconds).getTime() / 1000),
+            expiry: new Date(new Date().getTime() + config.tokenLifeMiliseconds).getTime(),
             token: token,
             refresh_token: refreshToken
         }
