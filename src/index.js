@@ -5,16 +5,22 @@ const router = express.Router();
 const bodyParser = require('body-parser');
 const PORT = process.env.PORT | 3000;
 const tokenChecker = require('./utils/tokenChecker');
+var multer = require('multer');
 
 const authRoutes = require( './components/auth/auth.routes');
 const volunteerRoutes = require( './components/volunteers/volunteers.routes');
 const donationsRoutes = require( './components/donations/donations.routes');
 
+var upload = multer();
+
 // parse application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // parse application/json
 app.use(bodyParser.json());
+
+// parse multipart/form-data for importing csv file
+app.use(upload.single('file')); 
 
 router.use('/auth', authRoutes);
 router.use('/volunteer', tokenChecker, volunteerRoutes);
