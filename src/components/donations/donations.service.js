@@ -48,6 +48,18 @@ module.exports = {
         return await createResponse(options);
     },
 
+    createDonator: async req => {
+        const options = {
+            method: 'post',
+            url: `/donations/createdonor`,
+            baseURL: "http://" + process.env.DA_IP + ":" + process.env.DA_PORT,
+            timeout: 3500,
+            data: { ...req.body }
+        };
+
+        return await createResponse(options);
+    },
+
     updateDonation: async req => {
         const options = {
             method: 'patch',
@@ -57,6 +69,18 @@ module.exports = {
             data: { ...req.body }
         };
           
+        return await createResponse(options);
+    },
+
+    editDonator: async req => {
+        const options = {
+            method: 'patch',
+            url: `/editdonor`,
+            baseURL: "http://" + process.env.DA_IP + ":" + process.env.DA_PORT,
+            timeout: 3500,
+            data: { ...req.body }
+        };
+
         return await createResponse(options);
     }
 }

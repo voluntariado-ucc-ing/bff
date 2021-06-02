@@ -36,3 +36,10 @@ module.exports.updateDonation = async (req, res) => {
     delete response['status'];
     return res.status(status).send(response);
 };
+
+module.exports.editDonator = async (req, res) => {
+    const response = await donationsService.editDonator(req);
+    let status = response.status;
+    delete response['status'];
+    return res.status(status).send(response);
+};
