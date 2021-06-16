@@ -23,6 +23,14 @@ module.exports.createDonation = async (req, res) => {
 
 };
 
+module.exports.createDonator = async (req, res) => {
+    const response = await donationsService.createDonator(req);
+    let status = response.status;
+    delete response['status']
+    return res.status(status).send(response);
+
+};
+
 module.exports.getDonations = async (req, res) => {
     const response = await donationsService.getDonations(req);
     let status = response.status;

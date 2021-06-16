@@ -74,8 +74,8 @@ module.exports = {
 
     editDonator: async req => {
         const options = {
-            method: 'patch',
-            url: `/editdonor`,
+            method: 'post',
+            url: `/donations/editdonor`,
             baseURL: "http://" + process.env.DA_IP + ":" + process.env.DA_PORT,
             timeout: 3500,
             data: { ...req.body }

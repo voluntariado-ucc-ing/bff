@@ -7,7 +7,7 @@ api.get('/donators', donationsController.getDonators);
 api.get('/get/:id', donationsController.getDonation);
 api.post('/create', donationsController.createDonation);
 api.post('/createdonor',donationsController.createDonator)
-api.post('/editdonor',donationsController.)
+api.post('/editdonor',donationsController.editDonator)
 api.get('/all', donationsController.getDonations);
 api.patch('/:id', donationsController.updateDonation);
 
