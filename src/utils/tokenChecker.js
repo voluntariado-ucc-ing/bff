@@ -10,6 +10,9 @@ module.exports = (req, res, next) => {
     if (token) {
         // verifies secret and checks exp
         jwt.verify(token, config.tokenSecret, (err, decoded) => {
+            
+            //TODO IMPLEMENT TOKEN VERIFICATION, REMOVED FOR A NON SUCCESSFULL MOBILE IMPLEMENTATION
+            /*
             if (err) {
                 return res.status(401).send(
                     new Response(
@@ -22,7 +25,9 @@ module.exports = (req, res, next) => {
                         401
                     )
                 );
-            }
+            }*/
+
+
             req.decoded = decoded;
             next();
         });
